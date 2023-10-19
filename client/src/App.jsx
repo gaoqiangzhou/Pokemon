@@ -1,11 +1,15 @@
 import './App.css';
+import SearchInput from './components/SearchInput';
+import { SelectProvider } from "./context/selectContext";
 
 function App() {
 
   return (
-    <div className="text-3xl font-bold underline">
-      Hello World
+    <SelectProvider>
+    <div className="h-screen grid place-items-center bg-gradient-to-r from-sky-600 to-indigo-600">
+      <SearchInput/>
     </div>
+    </SelectProvider>
   )
 }
 
