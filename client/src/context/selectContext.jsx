@@ -8,7 +8,7 @@ const SelectContext = createContext({
 
 export function SelectProvider({children}){
 
-    const [select, setSelect] = useState("By Pokemon Name/ID");
+    const [select, setSelect] = useState("By Pokemon Name/ID");//defualt option
     function changeSelect(newSelect)
     {
         setSelect(newSelect);
