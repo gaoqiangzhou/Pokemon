@@ -1,0 +1,58 @@
+body { margin: 25px; max-width:400px }
+
+.pkm-type {
+  font-size: 15px;
+  
+  font-family: 'Trebuchet MS';
+  font-weight: bold;
+  width: 6em;
+  text-align: center;
+  display: inline-block;
+  border: .1em solid transparent;
+  padding: .1em .2em .2em;
+  margin: .1em .015em;
+  border-radius: .4em;
+  span { 
+    text-transform: uppercase;
+    font-size:.8em; 
+    color: white;
+    text-shadow: 0em 0em .2em black; 
+  }
+  
+  &.normal     { background-color: #a8a878; border-top-color: lighten(#a8a878,15%); border-bottom-color: darken(#a8a878,15%); }
+  &.fire       { background-color: #78c850; border-top-color: lighten(#78c850,15%); border-bottom-color: darken(#78c850,15%); }
+  &.fighting   { background-color: #c03028; border-top-color: lighten(#c03028,15%); border-bottom-color: darken(#c03028,15%); }
+  &.water      { background-color: #6890f0; border-top-color: lighten(#6890f0,15%); border-bottom-color: darken(#6890f0,15%); }
+  &.poison     { background-color: #a040a0; border-top-color: lighten(#a040a0,15%); border-bottom-color: darken(#a040a0,15%); }
+  &.electrik   { background-color: #f8d030; border-top-color: lighten(#f8d030,15%); border-bottom-color: darken(#f8d030,15%); }
+  &.ground     { background-color: #e0c068; border-top-color: lighten(#e0c068,15%); border-bottom-color: darken(#e0c068,15%); }
+  &.grass      { background-color: #78c850; border-top-color: lighten(#78c850,15%); border-bottom-color: darken(#78c850,15%); }
+  &.flying     { background-color: #a890f0; border-top-color: lighten(#a890f0,15%); border-bottom-color: darken(#a890f0,15%); }
+  &.ice        { background-color: #98d8d8; border-top-color: lighten(#98d8d8,15%); border-bottom-color: darken(#98d8d8,15%); }
+  &.bug        { background-color: #a8b820; border-top-color: lighten(#a8b820,15%); border-bottom-color: darken(#a8b820,15%); }
+  &.psychic    { background-color: #f85888; border-top-color: lighten(#f85888,15%); border-bottom-color: darken(#f85888,15%); }
+  &.rock       { background-color: #b8a038; border-top-color: lighten(#b8a038,15%); border-bottom-color: darken(#b8a038,15%); }
+  &.dragon     { background-color: #7038f8; border-top-color: lighten(#7038f8,15%); border-bottom-color: darken(#7038f8,15%); }
+  &.ghost      { background-color: #705898; border-top-color: lighten(#705898,15%); border-bottom-color: darken(#705898,15%); }
+  &.dark       { background-color: #705848; border-top-color: lighten(#705848,15%); border-bottom-color: darken(#705848,15%); }
+  &.steel      { background-color: #b8b8d0; border-top-color: lighten(#b8b8d0,15%); border-bottom-color: darken(#b8b8d0,15%); }
+  &.fairy      { background-color: #ffb7fa; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
+}
+Normal Type: A8A77A
+Fire Type: EE8130
+Water Type: 6390F0
+Electric Type: F7D02C
+Grass Type: 7AC74C
+Ice Type: 96D9D6
+Fighting Type: C22E28
+Poison Type: A33EA1
+Ground Type: E2BF65
+Flying Type: A98FF3
+Psychic Type: F95587
+Bug Type: A6B91A
+Rock Type: B6A136
+Ghost Type: 735797
+Dragon Type: 6F35FC
+Dark Type: 705746
+Steel Type: B7B7CE
+Fairy Type: D685AD
