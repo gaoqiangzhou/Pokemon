@@ -3,7 +3,7 @@ import TypeBadge from './TypeBadge'
 
 const PokemonCard = (props) => {
   return (
-    <div className="w-full bg-gradient-to-r from-[#edfedb] to-[#92f91b] flex flex-row">
+    <div className="bg-gradient-to-r from-[#edfedb] to-[#92f91b] flex flex-row rounded-lg">
       <img src = {props.spriteUrl}></img>
       <div className="flex flex-col">
         <span>{props.name}</span>
