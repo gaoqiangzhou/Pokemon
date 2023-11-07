@@ -10,9 +10,14 @@ client = MongoClient('mongodb+srv://poke:z123123@cluster0.315hxqa.mongodb.net/?r
 db = client['pokemon']
 pokeCollection = db['pokemon']
 
+myquery = { "Pokedex Number": 1 }
+mydoc = pokeCollection.find(myquery)
+for x in mydoc:
+  print(x)
+
 @app.route('/')
 def index():
-    return "Hellowe world"
+    return "hello"
 
 if __name__ == "__main__":
     app.run(debug=True)
