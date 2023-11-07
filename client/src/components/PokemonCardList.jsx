@@ -2,12 +2,13 @@ import React from 'react'
 import PokemonCard from './PokemonCard';
 import { usePokemonInfo } from '../context/PokeInfoContext';
 
-const PokemonCardList = () => {
+
+const PokemonCardList = ({className}) => {
     const {pokemons} = usePokemonInfo();
   return (
-    <div className="absolute h-2/3 mt-[-170px] w-1/3 overflow-scroll">
+    <div className={"overflow-auto " + className}>
       {(!(pokemons.length === 0)) && 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col gap-y-1">
         {pokemons.map((poke) => <PokemonCard name = {poke.name} spriteUrl = {poke.spriteUrl} types={poke.types}/>)}
       </div>
       }

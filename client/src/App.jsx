@@ -1,28 +1,32 @@
 import './App.css';
-import SearchInput from './components/SearchInput';
-import { SelectProvider } from "./context/selectContext";
 import { PokeInfoProvider } from './context/PokeInfoContext';
+import Containter from "./components/Container";
+import SearchBar from './components/SearchBar';
 import PokemonCardList from './components/PokemonCardList';
-import { usePokemonInfo } from './context/PokeInfoContext';
+import PokeButton from './components/PokeButton';
 
 function App() {
-  const { pokemons } = usePokemonInfo();
+
   return (
-    <SelectProvider>
+
       <PokeInfoProvider>
-        <div className="h-screen w-screen bg-gradient-to-r from-sky-600 to-indigo-600">
-          <div className="w-full h-full grid grid-cols-3 grid-rows-5">
-            <div className="col-span-3 row-span-1 justify-self-center"><img src = "https://drive.google.com/uc?export=view&id=16JW-S_WDxEs8DXxp9ZM2ik_DnrakUffP" className= "w-[200px]"/></div>
-            <div className="row-span-4">
-              <SearchInput/>
-              <PokemonCardList/>
+            <div className="bg-[#3466AF] max-h-screen">
+              <div className="flex flex-col h-screen justify-center items-center">{/*flex wrapper*/}
+                <img src = "https://drive.google.com/uc?export=view&id=16JW-S_WDxEs8DXxp9ZM2ik_DnrakUffP" className= "w-[200px] mx-auto h-[15%]"/>
+                <Containter className= "px-5 w-[90%] h-[8%]"><h1 className="text-center font-semibold">Build your best Pokémon team and determine your winning rates!</h1></Containter>
+                <div className="flex flex-row h-[75%] w-[90%]">
+                  <Containter className = "w-2/5 flex flex-col gap-y-2">
+                    <h1 className="text-center font-bold h-[5%]">Build Your Team</h1>
+                    <SearchBar/>
+                    <PokemonCardList className="h-[80%]"/>
+                  </Containter>
+                  <div className = "w-1/5 m-auto"><PokeButton/></div>
+                  <Containter className = "w-2/5 flex flex-col gap-y-2"><h1 className="text-center font-bold h-[5%]">Result</h1></Containter>
+                </div>
               </div>
-            <div className="row-span-4">Factors</div>
-            <div className="row-span-4">Result</div>
-          </div>
-        </div>
+            </div>
       </PokeInfoProvider>
-    </SelectProvider>
+
   )
 }
 
