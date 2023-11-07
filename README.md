@@ -15,3 +15,4 @@ Needs `pip`, `python`, `virtualenv` installed
 3. Activate the enviornment: run `./env/Scripts/activate` (Windows) or `source env/bin/activate` (Mac)
 4. Install packages:
    - `pip install flask pymongo certifi`
+5. StartL: `python app.py`
