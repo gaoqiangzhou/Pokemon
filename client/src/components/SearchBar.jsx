@@ -8,6 +8,7 @@ const SearchBar = () => {
     const {pokemons, pokemonsUpdate} = usePokemonInfo();
     const NAMEID_ENDPOINT = "https://pokeapi.co/api/v2/pokemon/";
     const TYPE_ENDPOINT = "https://pokeapi.co/api/v2/type/";
+    const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`
     const [searchInput, setSearchInput] = useState("");
     const [searchAPI, setSearchAPI] = useState(NAMEID_ENDPOINT);
     const types = ["Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"];
@@ -15,8 +16,9 @@ const SearchBar = () => {
         const res = await axios.get(API);
         const data = res.data;
         const name = data.name;
+        const id = data.id;
         const types = data.types.map((t) => t.type.name.charAt(0).toUpperCase() + t.type.name.slice(1));
-        const spriteUrl = data.sprites.front_default;
+        const spriteUrl = SPRITE(id);
         const pk = {
           name: name,
           types: types,
