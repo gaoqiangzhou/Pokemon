@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import pprint
 from pymongo import MongoClient
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -90,6 +91,29 @@ def predict():
     # Export the results to another CSV file
     res = result_df.to_json(orient="split")
     return res
+@app.route('/pokemon', methods=['GET'])
+def getPokemonByNameIdType():
+    name = request.args.get('name')
+    id = request.args.get('id')
+    type = request.args.get('type')
+    type1 = request.args.get('type1')
+    type2 = request.args.get('type2')
+    if(name):
+        res = pokeCollection.find_one({"Name": name}, {"_id": 0})
+        return res
+    elif(id):
+        res = pokeCollection.find_one({"Pokedex Number": int(id)}, {"_id": 0})
+        return res
+    elif(type):
+        res = list(pokeCollection.find({ "$or": [{"Primary Type": type}, {"Secondary Type": type}] }, {"_id": 0}))
+        return res
+    else:
+        res = list(pokeCollection.find({"$or": [{ "$and": [{"Primary Type": type2}, {"Secondary Type": type1}] }, { "$and": [{"Primary Type": type1}, {"Secondary Type": type2}] }]}, {"_id": 0}))
+        return res
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
