@@ -11,6 +11,7 @@ const SearchBar = () => {
     const TYPE_ENDPOINT = (type) => `http://127.0.0.1:5000/pokemon?type=${type}`
     const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`
     const [searchInput, setSearchInput] = useState("");
+    const [selectInput, setSelectInput] = useState("Normal");
     const [byName, setbyName] = useState(true);
     const types = ["Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"];
     function isNumeric(value) {
@@ -27,28 +28,16 @@ const SearchBar = () => {
         }
         pokemonsUpdate((prev) => [...prev, pk]);
     }
-    async function getURLs(API){
+    async function getMultiplePokemons(API){
         const res = await axios.get(API);
         const data = res.data;
-
-        const urlList = data.pokemon.map((each) => each.pokemon.url);
-        return urlList;
-    }
-    async function getMultiplePokemons(APIs){
-        const requests = APIs.map((API) => axios.get(API));
-        const responses = await axios.all(requests);
-        responses.forEach((ea) => {
-            const data = ea.data;
-            const name = data.name;
-            const types = data.types.map((t) => t.type.name.charAt(0).toUpperCase() + t.type.name.slice(1));
-            const spriteUrl = data.sprites.front_default;
-            const pk = {
-                name: name,
-                types: types,
-                spriteUrl: spriteUrl,
+        const pks = data.map((ea) => (
+            {
+                ...ea,
+                spriteUrl: SPRITE(ea["Pokedex Number"])
             }
-            pokemonsUpdate((prev) => [...prev, pk]);
-        })
+        ))
+        pokemonsUpdate((prev) => [...prev, ...pks]);
     }
     async function handleClick(e)
     {
@@ -62,24 +51,22 @@ const SearchBar = () => {
             getOnePokemon(API)
         }else
         {   
-            API = TYPE_ENDPOINT(searchInput);
-            const urls = await getURLs(API);
-            getMultiplePokemons(urls);
+            API = TYPE_ENDPOINT(selectInput);
+            getMultiplePokemons(API);
         }
 
-        
     }
   return (
     <form className="flex flex-row gap-x-1 h-[10%]">
-      <select onChange = {(e) => {setbyName(e.target.value); (!byName)? setSearchInput("Normal") : setSearchInput("")}} className="bg-blue-400 p-0 w-1/3 flex items-center justify-between font-bold text-xs rounded-lg tracking-wider border-4 border-transparent active:border-white duration-300 active:text-white hover:border-white">
-        <option value = {byName} className="font-bold">By Name/ID</option>
-        <option value = {!byName} className="font-bold">By Type</option>
+      <select onChange = {() => setbyName(prev => !prev)} className="bg-blue-400 p-0 w-1/3 flex items-center justify-between font-bold text-xs rounded-lg tracking-wider border-4 border-transparent active:border-white duration-300 active:text-white hover:border-white">
+        <option className="font-bold">Name/ID</option>
+        <option className="font-bold">Type</option>
       </select>
       {
-        (byName)?
+        byName ?
         (<input value={searchInput} onChange={(e) => {setSearchInput(e.target.value)}} className = "w-2/3 rounded-lg"></input>)
         :
-        (<select value={searchInput} onChange={(e) => {setSearchInput(e.target.value)}} className = "w-2/3 rounded-lg">
+        (<select value={selectInput} onChange={(e) => {setSelectInput(e.target.value)}} className = "w-2/3 rounded-lg">
             {types.map((t) => <option key = {t} value = {t}> {t} </option>)}
         </select>)
       }

@@ -13,7 +13,8 @@ const PokemonCardList = (props) => {
           name = {poke["Name"]} 
           spriteUrl = {poke["spriteUrl"]} 
           primary ={poke["Primary Type"]}
-          secondary = {poke["Secondary Type"]}/>
+          secondary = {poke["Secondary Type"]}
+          hidden = {props.hidden}/>
         </div>)}
       </div>
       }
