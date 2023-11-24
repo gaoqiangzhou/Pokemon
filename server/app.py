@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pprint
 from pymongo import MongoClient
 from sklearn.model_selection import train_test_split
@@ -12,6 +13,7 @@ ca = certifi.where()
 
 # api route
 app = Flask(__name__)
+CORS(app)
 #MongoDb config
 client = MongoClient('mongodb+srv://poke:z123123@cluster0.315hxqa.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client['pokemon']
