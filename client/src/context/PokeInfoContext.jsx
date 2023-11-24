@@ -3,13 +3,16 @@ import React, { createContext, useContext, useState } from 'react'
 const PokeInfoContext = createContext({
     pokemons: [],
     selectPks: [],
+    resultPks: [],
     pokemonsUpdate: () => Promise,
     selectPksUpdate: () => Promise,
+    resultPksUpdate: () => Promise
 });
 
 export function PokeInfoProvider({children}){
     const [pokemons, setPokemons] = useState([]);
     const [selectPks, setSelectPks] = useState([]);
+    const [resultPks, setResultPks] = useState([]);
     function updatePokemons(newPokemon)
     {
         setPokemons(newPokemon);
@@ -18,13 +21,19 @@ export function PokeInfoProvider({children}){
     {
       setSelectPks(newSelect);
     }
+    function updateResultPks(newResult)
+    {
+      setResultPks(newResult);
+    }
 
     const contexValue = 
     {
         pokemons: pokemons,
         selectPks: selectPks,
+        resultPks: resultPks,
         pokemonsUpdate: updatePokemons,
-        selectPksUpdate: updateSelectPks
+        selectPksUpdate: updateSelectPks,
+        resultPksUpdate: updateResultPks
     }
   return (
     <PokeInfoContext.Provider value = {contexValue}>
