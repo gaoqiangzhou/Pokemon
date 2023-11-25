@@ -39,7 +39,8 @@ const PokeButton = ({className}) => {
     return json;
   }
   const handleClick = async () => {
-    resultPksUpdate([])
+    resultPksUpdate([]);
+    const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
     const PREDICT_API = "http://127.0.0.1:5000/predict"
     const Type2_API = (type1, type2) => `http://127.0.0.1:5000/pokemon?type1=${type1}&type2=${type2}`
     const json = generateJson()
@@ -50,7 +51,12 @@ const PokeButton = ({className}) => {
     const responses = await Promise.all(requests);
     responses.forEach((ea) => {
       const pokeData = ea.data;
-      const randomPoke = pokeData[getRandomInt(pokeData.length)];
+      let randomPoke = pokeData[getRandomInt(pokeData.length)];
+      randomPoke = 
+      {
+        ...randomPoke,
+        spriteUrl: SPRITE(randomPoke["Pokedex Number"])
+      }
       resultPksUpdate((prev) => [...prev, randomPoke]);
   });
   }
