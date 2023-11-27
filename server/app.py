@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from io import StringIO
+import random
 # Load the dataset
 import pandas as pd
 import certifi
@@ -114,7 +115,6 @@ def getPokemonByNameIdType():
         return res
 
 @app.route('/recommendations/<pokemon_name>', methods=['GET'])
-
 def get_pokemon_recommendation(pokemon_name):
     myquery = {"Name": pokemon_name.capitalize()}
     result = pokeCollection.find_one(myquery)
@@ -303,7 +303,7 @@ def get_pokemon_recommendation(pokemon_name):
                         conditions.append(defense_condition3)
         
         # Print conditions before extending recommendation query
-        print(f"Conditions before extending: {conditions}")
+        #print(f"Conditions before extending: {conditions}")
         # Extend recommendation query with conditions
         if conditions:
             recommendation_query["$and"].extend(conditions)
@@ -321,6 +321,7 @@ def get_pokemon_recommendation(pokemon_name):
                 'Name': random_recommendation['Name'],
                 'Primary Type': random_recommendation['Primary Type'],
                 'Secondary Type': random_recommendation['Secondary Type'],
+                'Pokedex Number': random_recommendation['Pokedex Number'],
                 'Stats': {
                     'HP': random_recommendation['HP'],
                     'Attack': random_recommendation['Attack'],
@@ -333,13 +334,14 @@ def get_pokemon_recommendation(pokemon_name):
                 }
             }
             #print(f"Recommendation query: {recommendation_query}")
-            return jsonify(response), 200
+            return response
         else:
             # Backup if no recommendation
             matching_pokemon_cursor1 = pokeCollection.find(recommendation_query1)
 
             # Convert the cursor to a list
             matching_pokemon_list1 = list(matching_pokemon_cursor1)
+            print(matching_pokemon_list1)
 
             if matching_pokemon_list1:
             # Randomly choose one Pokemon from the list
@@ -349,6 +351,7 @@ def get_pokemon_recommendation(pokemon_name):
                     'Name': random_recommendation1['Name'],
                     'Primary Type': random_recommendation1['Primary Type'],
                     'Secondary Type': random_recommendation1['Secondary Type'],
+                    'Pokedex Number': random_recommendation1['Pokedex Number'],
                     'Stats': {
                         'HP': random_recommendation1['HP'],
                         'Attack': random_recommendation1['Attack'],
@@ -360,7 +363,7 @@ def get_pokemon_recommendation(pokemon_name):
                         'Speed': random_recommendation1['Speed']
                     }
                 }
-                return jsonify((response1)), 404
+                return response1
 
 
 

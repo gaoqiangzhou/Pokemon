@@ -41,24 +41,20 @@ const PokeButton = ({className}) => {
   const handleClick = async () => {
     resultPksUpdate([]);
     const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
-    const PREDICT_API = "http://127.0.0.1:5000/predict"
-    const Type2_API = (type1, type2) => `http://127.0.0.1:5000/pokemon?type1=${type1}&type2=${type2}`
-    const json = generateJson()
-    const res = await axios.post(PREDICT_API, json)
-    const data = res.data.data;
-    const typesAPIs = data.map(ea => ([ea[20], ea[21]])).map((type) => Type2_API(type[0], type[1]))
-    const requests = typesAPIs.map((API) => axios.get(API));
+    const RECOM_API = (name) => `http://127.0.0.1:5000/recommendations/${name}`
+    const RECOM_APIs = selectPks.map((ea) => RECOM_API(ea["Name"]))
+    const requests = RECOM_APIs.map((API) => axios.get(API));
     const responses = await Promise.all(requests);
     responses.forEach((ea) => {
-      const pokeData = ea.data;
-      let randomPoke = pokeData[getRandomInt(pokeData.length)];
-      randomPoke = 
-      {
-        ...randomPoke,
-        spriteUrl: SPRITE(randomPoke["Pokedex Number"])
+      const data = ea.data;
+      const poke = {
+        "Name": data["Name"],
+        "spriteUrl": SPRITE(data["Pokedex Number"]),
+        "Primary Type": data["Primary Type"],
+        "Secondary Type": data["Secondary Type"] 
       }
-      resultPksUpdate((prev) => [...prev, randomPoke]);
-  });
+      resultPksUpdate((prev) => [...prev, poke]);
+   });
   }
   return (
     <button className = {className} onClick={handleClick}>
