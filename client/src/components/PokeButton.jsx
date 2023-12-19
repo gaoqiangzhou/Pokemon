@@ -40,8 +40,9 @@ const PokeButton = ({className}) => {
   }
   const handleClick = async () => {
     resultPksUpdate([]);
-    const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
-    const RECOM_API = (name) => `http://127.0.0.1:5000/recommendations/${name}`
+    const imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+    const SPRITE = (num) => `${imageUrl}/${num}.png`;
+    const RECOM_API = (name) => `https://pokemon-recommender-api-ee8c8dbc2038.herokuapp.com/recommendations/${name}`
     const RECOM_APIs = selectPks.map((ea) => RECOM_API(ea["Name"]))
     const requests = RECOM_APIs.map((API) => axios.get(API));
     const responses = await Promise.all(requests);
