@@ -6,10 +6,11 @@ import { usePokemonInfo } from '../context/PokeInfoContext';
 
 const SearchBar = () => {
     const {pokemons, pokemonsUpdate} = usePokemonInfo();
-    const NAME_ENDPOINT = (name) => `http://127.0.0.1:5000/pokemon?name=${name}`;
-    const ID_ENDPOINT = (id) => `http://127.0.0.1:5000/pokemon?id=${id}`
-    const TYPE_ENDPOINT = (type) => `http://127.0.0.1:5000/pokemon?type=${type}`
-    const SPRITE = (num) => `https:/raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`
+    const imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+    const NAME_ENDPOINT = (name) => `https://pokemon-recommender-api-ee8c8dbc2038.herokuapp.com/pokemon?name=${name}`;
+    const ID_ENDPOINT = (id) => `https://pokemon-recommender-api-ee8c8dbc2038.herokuapp.com/pokemon?id=${id}`
+    const TYPE_ENDPOINT = (type) => `https://pokemon-recommender-api-ee8c8dbc2038.herokuapp.com/pokemon?type=${type}`
+    const SPRITE = (num) => `${imageUrl}/${num}.png`
     const [searchInput, setSearchInput] = useState("");
     const [selectInput, setSelectInput] = useState("Normal");
     const [byName, setbyName] = useState(true);
