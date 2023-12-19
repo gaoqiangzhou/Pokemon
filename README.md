@@ -1,5 +1,9 @@
 # Start
 
+Deployed website can be viewed here: https://pokemon-recommender.vercel.app/
+
+Deployed backend: https://pokemon-recommender-api-ee8c8dbc2038.herokuapp.com/
+
 ## Client
 
 1. Navigate into `client`: `cd client`
